@@ -1,11 +1,13 @@
 package com.eload.website.controller;
 
-import com.eload.pojo.LoginInfo;
+import com.eload.pojo.Account;
+import com.eload.pojo.UserInfo;
+import com.eload.website.service.AccountService;
+import com.eload.website.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 个人中心
@@ -14,16 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PersonalCotroller {
 
-	/*@Autowired
-	private IUserinfoService userinfoService;
 	@Autowired
-	private IAccountService accountService;*/
+	private UserInfoService userInfoService;
+	@Autowired
+	private AccountService accountService;
 
 
 	@RequestMapping("personal")
 	public String personalCenter(Model model) {
 
-
+		UserInfo userInfo = userInfoService.getUserInfo(4L);
+		Account account = accountService.getAccount(4L);
+		model.addAttribute("account",account);
+		model.addAttribute("userInfo",userInfo);
 		return "personal";
 	}
 

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eload.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.eload.pojo.UserInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="bitState" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="realName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="idNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phoneNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="incomeGrade_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="marriage_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="kidCount_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="educationBackground_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="authScore" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="houseCondition_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="realauthid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, version, bitState, realName, idNumber, phoneNumber, incomeGrade_id, marriage_id, 
+    kidCount_id, educationBackground_id, authScore, houseCondition_id, realauthid, email
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eload.pojo.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eload.pojo.UserInfoExample" >
+    delete from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eload.pojo.UserInfo" >
+    insert into userinfo (id, version, bitState, 
+      realName, idNumber, phoneNumber, 
+      incomeGrade_id, marriage_id, kidCount_id, 
+      educationBackground_id, authScore, houseCondition_id, 
+      realauthid, email)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{bitstate,jdbcType=BIGINT}, 
+      #{realname,jdbcType=VARCHAR}, #{idnumber,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{incomegradeId,jdbcType=BIGINT}, #{marriageId,jdbcType=BIGINT}, #{kidcountId,jdbcType=BIGINT}, 
+      #{educationbackgroundId,jdbcType=BIGINT}, #{authscore,jdbcType=INTEGER}, #{houseconditionId,jdbcType=BIGINT}, 
+      #{realauthid,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eload.pojo.UserInfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="bitstate != null" >
+        bitState,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="idnumber != null" >
+        idNumber,
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber,
+      </if>
+      <if test="incomegradeId != null" >
+        incomeGrade_id,
+      </if>
+      <if test="marriageId != null" >
+        marriage_id,
+      </if>
+      <if test="kidcountId != null" >
+        kidCount_id,
+      </if>
+      <if test="educationbackgroundId != null" >
+        educationBackground_id,
+      </if>
+      <if test="authscore != null" >
+        authScore,
+      </if>
+      <if test="houseconditionId != null" >
+        houseCondition_id,
+      </if>
+      <if test="realauthid != null" >
+        realauthid,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bitstate != null" >
+        #{bitstate,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null" >
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="incomegradeId != null" >
+        #{incomegradeId,jdbcType=BIGINT},
+      </if>
+      <if test="marriageId != null" >
+        #{marriageId,jdbcType=BIGINT},
+      </if>
+      <if test="kidcountId != null" >
+        #{kidcountId,jdbcType=BIGINT},
+      </if>
+      <if test="educationbackgroundId != null" >
+        #{educationbackgroundId,jdbcType=BIGINT},
+      </if>
+      <if test="authscore != null" >
+        #{authscore,jdbcType=INTEGER},
+      </if>
+      <if test="houseconditionId != null" >
+        #{houseconditionId,jdbcType=BIGINT},
+      </if>
+      <if test="realauthid != null" >
+        #{realauthid,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eload.pojo.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update userinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.bitstate != null" >
+        bitState = #{record.bitstate,jdbcType=BIGINT},
+      </if>
+      <if test="record.realname != null" >
+        realName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idnumber != null" >
+        idNumber = #{record.idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomegradeId != null" >
+        incomeGrade_id = #{record.incomegradeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.marriageId != null" >
+        marriage_id = #{record.marriageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.kidcountId != null" >
+        kidCount_id = #{record.kidcountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.educationbackgroundId != null" >
+        educationBackground_id = #{record.educationbackgroundId,jdbcType=BIGINT},
+      </if>
+      <if test="record.authscore != null" >
+        authScore = #{record.authscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.houseconditionId != null" >
+        houseCondition_id = #{record.houseconditionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.realauthid != null" >
+        realauthid = #{record.realauthid,jdbcType=BIGINT},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update userinfo
+    set id = #{record.id,jdbcType=BIGINT},
+      version = #{record.version,jdbcType=INTEGER},
+      bitState = #{record.bitstate,jdbcType=BIGINT},
+      realName = #{record.realname,jdbcType=VARCHAR},
+      idNumber = #{record.idnumber,jdbcType=VARCHAR},
+      phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      incomeGrade_id = #{record.incomegradeId,jdbcType=BIGINT},
+      marriage_id = #{record.marriageId,jdbcType=BIGINT},
+      kidCount_id = #{record.kidcountId,jdbcType=BIGINT},
+      educationBackground_id = #{record.educationbackgroundId,jdbcType=BIGINT},
+      authScore = #{record.authscore,jdbcType=INTEGER},
+      houseCondition_id = #{record.houseconditionId,jdbcType=BIGINT},
+      realauthid = #{record.realauthid,jdbcType=BIGINT},
+      email = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eload.pojo.UserInfo" >
+    update userinfo
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bitstate != null" >
+        bitState = #{bitstate,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null" >
+        idNumber = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="incomegradeId != null" >
+        incomeGrade_id = #{incomegradeId,jdbcType=BIGINT},
+      </if>
+      <if test="marriageId != null" >
+        marriage_id = #{marriageId,jdbcType=BIGINT},
+      </if>
+      <if test="kidcountId != null" >
+        kidCount_id = #{kidcountId,jdbcType=BIGINT},
+      </if>
+      <if test="educationbackgroundId != null" >
+        educationBackground_id = #{educationbackgroundId,jdbcType=BIGINT},
+      </if>
+      <if test="authscore != null" >
+        authScore = #{authscore,jdbcType=INTEGER},
+      </if>
+      <if test="houseconditionId != null" >
+        houseCondition_id = #{houseconditionId,jdbcType=BIGINT},
+      </if>
+      <if test="realauthid != null" >
+        realauthid = #{realauthid,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eload.pojo.UserInfo" >
+    update userinfo
+    set version = #{version,jdbcType=INTEGER},
+      bitState = #{bitstate,jdbcType=BIGINT},
+      realName = #{realname,jdbcType=VARCHAR},
+      idNumber = #{idnumber,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      incomeGrade_id = #{incomegradeId,jdbcType=BIGINT},
+      marriage_id = #{marriageId,jdbcType=BIGINT},
+      kidCount_id = #{kidcountId,jdbcType=BIGINT},
+      educationBackground_id = #{educationbackgroundId,jdbcType=BIGINT},
+      authScore = #{authscore,jdbcType=INTEGER},
+      houseCondition_id = #{houseconditionId,jdbcType=BIGINT},
+      realauthid = #{realauthid,jdbcType=BIGINT},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
