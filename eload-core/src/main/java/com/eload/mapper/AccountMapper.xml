@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eload.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.eload.pojo.Account" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="tradePassword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="borrowLimitAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="unReceiveInterest" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReceivePrincipal" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReturnAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="remainBorrowLimit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tradePassword, usableAmount, freezedAmount, borrowLimitAmount, version, unReceiveInterest, 
+    unReceivePrincipal, unReturnAmount, remainBorrowLimit
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eload.pojo.AccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eload.pojo.AccountExample" >
+    delete from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eload.pojo.Account" >
+    insert into account (id, tradePassword, usableAmount, 
+      freezedAmount, borrowLimitAmount, version, 
+      unReceiveInterest, unReceivePrincipal, 
+      unReturnAmount, remainBorrowLimit)
+    values (#{id,jdbcType=BIGINT}, #{tradepassword,jdbcType=VARCHAR}, #{usableamount,jdbcType=DECIMAL}, 
+      #{freezedamount,jdbcType=DECIMAL}, #{borrowlimitamount,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, 
+      #{unreceiveinterest,jdbcType=DECIMAL}, #{unreceiveprincipal,jdbcType=DECIMAL}, 
+      #{unreturnamount,jdbcType=DECIMAL}, #{remainborrowlimit,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eload.pojo.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="borrowlimitamount != null" >
+        borrowLimitAmount,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest,
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal,
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount,
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tradepassword != null" >
+        #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimitamount != null" >
+        #{borrowlimitamount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eload.pojo.AccountExample" resultType="java.lang.Integer" >
+    select count(*) from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update account
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tradepassword != null" >
+        tradePassword = #{record.tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usableamount != null" >
+        usableAmount = #{record.usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezedamount != null" >
+        freezedAmount = #{record.freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.borrowlimitamount != null" >
+        borrowLimitAmount = #{record.borrowlimitamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.unreceiveinterest != null" >
+        unReceiveInterest = #{record.unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unreceiveprincipal != null" >
+        unReceivePrincipal = #{record.unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unreturnamount != null" >
+        unReturnAmount = #{record.unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainborrowlimit != null" >
+        remainBorrowLimit = #{record.remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update account
+    set id = #{record.id,jdbcType=BIGINT},
+      tradePassword = #{record.tradepassword,jdbcType=VARCHAR},
+      usableAmount = #{record.usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{record.freezedamount,jdbcType=DECIMAL},
+      borrowLimitAmount = #{record.borrowlimitamount,jdbcType=DECIMAL},
+      version = #{record.version,jdbcType=INTEGER},
+      unReceiveInterest = #{record.unreceiveinterest,jdbcType=DECIMAL},
+      unReceivePrincipal = #{record.unreceiveprincipal,jdbcType=DECIMAL},
+      unReturnAmount = #{record.unreturnamount,jdbcType=DECIMAL},
+      remainBorrowLimit = #{record.remainborrowlimit,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eload.pojo.Account" >
+    update account
+    <set >
+      <if test="tradepassword != null" >
+        tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimitamount != null" >
+        borrowLimitAmount = #{borrowlimitamount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eload.pojo.Account" >
+    update account
+    set tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      borrowLimitAmount = #{borrowlimitamount,jdbcType=DECIMAL},
+      version = #{version,jdbcType=INTEGER},
+      unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

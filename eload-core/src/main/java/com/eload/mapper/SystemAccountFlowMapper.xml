@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eload.dao.SystemAccountFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.eload.pojo.SystemAccountFlow" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="createdDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="accountactiontype" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="systemAccount_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="targetuser_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, createdDate, accountactiontype, amount, note, balance, freezedAmount, systemAccount_id, 
+    targetuser_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eload.pojo.SystemAccountFlowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from systemaccountflow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from systemaccountflow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from systemaccountflow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eload.pojo.SystemAccountFlowExample" >
+    delete from systemaccountflow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eload.pojo.SystemAccountFlow" >
+    insert into systemaccountflow (id, createdDate, accountactiontype, 
+      amount, note, balance, 
+      freezedAmount, systemAccount_id, targetuser_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{createddate,jdbcType=TIMESTAMP}, #{accountactiontype,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{note,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, 
+      #{freezedamount,jdbcType=DECIMAL}, #{systemaccountId,jdbcType=BIGINT}, #{targetuserId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eload.pojo.SystemAccountFlow" >
+    insert into systemaccountflow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createddate != null" >
+        createdDate,
+      </if>
+      <if test="accountactiontype != null" >
+        accountactiontype,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="systemaccountId != null" >
+        systemAccount_id,
+      </if>
+      <if test="targetuserId != null" >
+        targetuser_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createddate != null" >
+        #{createddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountactiontype != null" >
+        #{accountactiontype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="systemaccountId != null" >
+        #{systemaccountId,jdbcType=BIGINT},
+      </if>
+      <if test="targetuserId != null" >
+        #{targetuserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eload.pojo.SystemAccountFlowExample" resultType="java.lang.Integer" >
+    select count(*) from systemaccountflow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update systemaccountflow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createddate != null" >
+        createdDate = #{record.createddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accountactiontype != null" >
+        accountactiontype = #{record.accountactiontype,jdbcType=TINYINT},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezedamount != null" >
+        freezedAmount = #{record.freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.systemaccountId != null" >
+        systemAccount_id = #{record.systemaccountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.targetuserId != null" >
+        targetuser_id = #{record.targetuserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update systemaccountflow
+    set id = #{record.id,jdbcType=BIGINT},
+      createdDate = #{record.createddate,jdbcType=TIMESTAMP},
+      accountactiontype = #{record.accountactiontype,jdbcType=TINYINT},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      note = #{record.note,jdbcType=VARCHAR},
+      balance = #{record.balance,jdbcType=DECIMAL},
+      freezedAmount = #{record.freezedamount,jdbcType=DECIMAL},
+      systemAccount_id = #{record.systemaccountId,jdbcType=BIGINT},
+      targetuser_id = #{record.targetuserId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eload.pojo.SystemAccountFlow" >
+    update systemaccountflow
+    <set >
+      <if test="createddate != null" >
+        createdDate = #{createddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountactiontype != null" >
+        accountactiontype = #{accountactiontype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="systemaccountId != null" >
+        systemAccount_id = #{systemaccountId,jdbcType=BIGINT},
+      </if>
+      <if test="targetuserId != null" >
+        targetuser_id = #{targetuserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eload.pojo.SystemAccountFlow" >
+    update systemaccountflow
+    set createdDate = #{createddate,jdbcType=TIMESTAMP},
+      accountactiontype = #{accountactiontype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      systemAccount_id = #{systemaccountId,jdbcType=BIGINT},
+      targetuser_id = #{targetuserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eload.dao.PaymentScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.eload.pojo.PaymentSchedule" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="deadLine" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="payDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="totalAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="principal" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="interest" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="monthIndex" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="state" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="bidRequestType" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="returnType" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="bidrequest_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="biduser_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="bidRequestTitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deadLine, payDate, totalAmount, principal, interest, monthIndex, state, bidRequestType, 
+    returnType, bidrequest_id, biduser_id, bidRequestTitle
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eload.pojo.PaymentScheduleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paymentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from paymentschedule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from paymentschedule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eload.pojo.PaymentScheduleExample" >
+    delete from paymentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eload.pojo.PaymentSchedule" >
+    insert into paymentschedule (id, deadLine, payDate, 
+      totalAmount, principal, interest, 
+      monthIndex, state, bidRequestType, 
+      returnType, bidrequest_id, biduser_id, 
+      bidRequestTitle)
+    values (#{id,jdbcType=BIGINT}, #{deadline,jdbcType=TIMESTAMP}, #{paydate,jdbcType=TIMESTAMP}, 
+      #{totalamount,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, 
+      #{monthindex,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{bidrequesttype,jdbcType=TINYINT}, 
+      #{returntype,jdbcType=TINYINT}, #{bidrequestId,jdbcType=BIGINT}, #{biduserId,jdbcType=BIGINT}, 
+      #{bidrequesttitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eload.pojo.PaymentSchedule" >
+    insert into paymentschedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deadline != null" >
+        deadLine,
+      </if>
+      <if test="paydate != null" >
+        payDate,
+      </if>
+      <if test="totalamount != null" >
+        totalAmount,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="monthindex != null" >
+        monthIndex,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="bidrequesttype != null" >
+        bidRequestType,
+      </if>
+      <if test="returntype != null" >
+        returnType,
+      </if>
+      <if test="bidrequestId != null" >
+        bidrequest_id,
+      </if>
+      <if test="biduserId != null" >
+        biduser_id,
+      </if>
+      <if test="bidrequesttitle != null" >
+        bidRequestTitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paydate != null" >
+        #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthindex != null" >
+        #{monthindex,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="bidrequesttype != null" >
+        #{bidrequesttype,jdbcType=TINYINT},
+      </if>
+      <if test="returntype != null" >
+        #{returntype,jdbcType=TINYINT},
+      </if>
+      <if test="bidrequestId != null" >
+        #{bidrequestId,jdbcType=BIGINT},
+      </if>
+      <if test="biduserId != null" >
+        #{biduserId,jdbcType=BIGINT},
+      </if>
+      <if test="bidrequesttitle != null" >
+        #{bidrequesttitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eload.pojo.PaymentScheduleExample" resultType="java.lang.Integer" >
+    select count(*) from paymentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paymentschedule
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.deadline != null" >
+        deadLine = #{record.deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paydate != null" >
+        payDate = #{record.paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalamount != null" >
+        totalAmount = #{record.totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interest != null" >
+        interest = #{record.interest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthindex != null" >
+        monthIndex = #{record.monthindex,jdbcType=TINYINT},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.bidrequesttype != null" >
+        bidRequestType = #{record.bidrequesttype,jdbcType=TINYINT},
+      </if>
+      <if test="record.returntype != null" >
+        returnType = #{record.returntype,jdbcType=TINYINT},
+      </if>
+      <if test="record.bidrequestId != null" >
+        bidrequest_id = #{record.bidrequestId,jdbcType=BIGINT},
+      </if>
+      <if test="record.biduserId != null" >
+        biduser_id = #{record.biduserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.bidrequesttitle != null" >
+        bidRequestTitle = #{record.bidrequesttitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paymentschedule
+    set id = #{record.id,jdbcType=BIGINT},
+      deadLine = #{record.deadline,jdbcType=TIMESTAMP},
+      payDate = #{record.paydate,jdbcType=TIMESTAMP},
+      totalAmount = #{record.totalamount,jdbcType=DECIMAL},
+      principal = #{record.principal,jdbcType=DECIMAL},
+      interest = #{record.interest,jdbcType=DECIMAL},
+      monthIndex = #{record.monthindex,jdbcType=TINYINT},
+      state = #{record.state,jdbcType=TINYINT},
+      bidRequestType = #{record.bidrequesttype,jdbcType=TINYINT},
+      returnType = #{record.returntype,jdbcType=TINYINT},
+      bidrequest_id = #{record.bidrequestId,jdbcType=BIGINT},
+      biduser_id = #{record.biduserId,jdbcType=BIGINT},
+      bidRequestTitle = #{record.bidrequesttitle,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eload.pojo.PaymentSchedule" >
+    update paymentschedule
+    <set >
+      <if test="deadline != null" >
+        deadLine = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paydate != null" >
+        payDate = #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalamount != null" >
+        totalAmount = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthindex != null" >
+        monthIndex = #{monthindex,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="bidrequesttype != null" >
+        bidRequestType = #{bidrequesttype,jdbcType=TINYINT},
+      </if>
+      <if test="returntype != null" >
+        returnType = #{returntype,jdbcType=TINYINT},
+      </if>
+      <if test="bidrequestId != null" >
+        bidrequest_id = #{bidrequestId,jdbcType=BIGINT},
+      </if>
+      <if test="biduserId != null" >
+        biduser_id = #{biduserId,jdbcType=BIGINT},
+      </if>
+      <if test="bidrequesttitle != null" >
+        bidRequestTitle = #{bidrequesttitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eload.pojo.PaymentSchedule" >
+    update paymentschedule
+    set deadLine = #{deadline,jdbcType=TIMESTAMP},
+      payDate = #{paydate,jdbcType=TIMESTAMP},
+      totalAmount = #{totalamount,jdbcType=DECIMAL},
+      principal = #{principal,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      monthIndex = #{monthindex,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      bidRequestType = #{bidrequesttype,jdbcType=TINYINT},
+      returnType = #{returntype,jdbcType=TINYINT},
+      bidrequest_id = #{bidrequestId,jdbcType=BIGINT},
+      biduser_id = #{biduserId,jdbcType=BIGINT},
+      bidRequestTitle = #{bidrequesttitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
