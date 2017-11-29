@@ -25,8 +25,8 @@ public class PersonalCotroller {
 	@RequestMapping("personal")
 	public String personalCenter(Model model) {
 
-		UserInfo userInfo = userInfoService.getUserInfo(4L);
-		Account account = accountService.getAccount(4L);
+		UserInfo userInfo = userInfoService.getUserInfo(6L);
+		Account account = accountService.getAccount(6L);
 		model.addAttribute("account",account);
 		model.addAttribute("userInfo",userInfo);
 		return "personal";

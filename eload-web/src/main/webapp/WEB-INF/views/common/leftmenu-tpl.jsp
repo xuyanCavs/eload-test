@@ -13,7 +13,7 @@
 	<li class="list-group-item">
 		<a href="#"><span class="text-title">我的账户</span></a>
 		<ul class="in">
-			<li name="personal"><a href="#">账户信息</a></li>
+			<li name="personal"><a href="/personal.do">账户信息</a></li>
 			<li name="realAuth"><a href="/realAuth.do">实名认证</a></li>
 			<li name="userFile"><a href="/userFile.do">风控资料认证</a></li>
 			<li name="bankInfo"><a href="/bankInfo.do">银行卡管理</a></li>
@@ -32,7 +32,7 @@
 </ul>
 
 <!--<#if currentMenu??>-->
-<script type="text/javascript">
+<%--<script type="text/javascript">
 	$(".list-group-item li[name=${currentMenu}]").addClass("active");
-</script>
+</script>--%>
 <!--</#if>-->
