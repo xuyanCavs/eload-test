@@ -22,6 +22,8 @@ public class RealAuthController {
     public String realAuth(Model model){
         UserInfo userInfo = userInfoService.getUserInfo(6);
         if (userInfo.getRealauthid()==2){
+            System.out.println("1111111");
+            System.out.println("1111111111111");
             return "realAuth";
         }else if(userInfo.getRealauthid()==1||userInfo.getRealauthid()==3){
             if (userInfo.getRealauthid()==1){
