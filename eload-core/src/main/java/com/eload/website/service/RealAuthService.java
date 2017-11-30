@@ -4,4 +4,6 @@ import com.eload.pojo.RealAuth;
 
 public interface RealAuthService {
     RealAuth getRealAuth(long l);
+
+    int apply(RealAuth realAuth);
 }
