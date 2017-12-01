@@ -163,24 +163,4 @@ public class RealAuth {
     public void setApplierId(Long applierId) {
         this.applierId = applierId;
     }
-
-    @Override
-    public String toString() {
-        return "RealAuth{" +
-                "id=" + id +
-                ", realname='" + realname + '\'' +
-                ", sex=" + sex +
-                ", birthdate='" + birthdate + '\'' +
-                ", idnumber='" + idnumber + '\'' +
-                ", address='" + address + '\'' +
-                ", state=" + state +
-                ", image1='" + image1 + '\'' +
-                ", image2='" + image2 + '\'' +
-                ", remark='" + remark + '\'' +
-                ", audittime=" + audittime +
-                ", applytime=" + applytime +
-                ", auditorId=" + auditorId +
-                ", applierId=" + applierId +
-                '}';
-    }
 }

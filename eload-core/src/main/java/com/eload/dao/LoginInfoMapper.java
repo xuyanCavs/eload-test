@@ -21,6 +21,7 @@ public interface LoginInfoMapper {
 
     LoginInfo selectByPrimaryKey(Long id);
 
+
     int updateByExampleSelective(@Param("record") LoginInfo record, @Param("example") LoginInfoExample example);
 
     int updateByExample(@Param("record") LoginInfo record, @Param("example") LoginInfoExample example);
@@ -28,4 +29,6 @@ public interface LoginInfoMapper {
     int updateByPrimaryKeySelective(LoginInfo record);
 
     int updateByPrimaryKey(LoginInfo record);
+
+
 }

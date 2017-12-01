@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -64,7 +65,9 @@
 					dataType:"json",
 					success:function(data){
 						if(data.success){
-							$.messager.confirm("提示","注册成功")
+
+							$.messager.confirm("提示","注册成功"),
+							window.location.href="login.jsp"
 						}else{
 							$.messager.popup("注册失败!")
 						}
@@ -91,7 +94,7 @@
 		<div class="container" style="position: relative;">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/">首页</a></li>
-				<li><a href="/login.html">登录</a></li>
+				<li><a href="/login.jsp">登录</a></li>
 				<li><a href="#">帮助</a></li>
 			</ul>
 		</div>
@@ -134,11 +137,11 @@
 			</div> 
 			<div class="form-gorup">   
 				<div class="col-sm-offset-2">  
-					<button type="submit" class="btn btn-success">
+					<button class="btn btn-success">
 						同意协议并注册
 					</button>
 					&emsp;&emsp;
-					<a href="/login.html" class="text-primary">已有账号，马上登录</a>
+					<a href="/login.jsp" class="text-primary">已有账号，马上登录</a>
 					
 					<p style="padding-left: 50px;margin-top: 15px;">
 						<a href="#">《使用协议说明书》</a>
@@ -152,13 +155,13 @@
 		<div class="context">
 			<div class="left">
 				<p>专注于高级Java开发工程师的培养</p>
-				<p>版权所有：&emsp;2015广州小码哥教育科技有限公司</p>
-				<p>地&emsp;&emsp;址：&emsp;广州市天河区棠下荷光三横路盛达商务园D座5楼</p>
+				<p>版权所有：&emsp;2015杭州千峰教育科技有限公司</p>
+				<p>地&emsp;&emsp;址：&emsp;杭州市江干区九堡镇旺田商务园D座5楼</p>
 				<p>电&emsp;&emsp;话： 020-29007520&emsp;&emsp;
 					邮箱：&emsp;service@520it.com</p>
 				<p>
 					<a href="http://www.miitbeian.gov.cn" style="color: #ffffff">ICP备案
-						：粤ICP备字1504547</a>
+						：浙ICP备字1504547</a>
 				</p>
 				<p>
 					<a href="http://www.gzjd.gov.cn/wlaqjc/open/validateSite.do" style="color: #ffffff">穗公网安备：44010650010086</a>

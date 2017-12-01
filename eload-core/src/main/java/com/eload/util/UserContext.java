@@ -1,11 +1,11 @@
-package com.eload.website.util;
+package com.eload.util;
 
-import javax.servlet.http.HttpSession;
-
+import com.eload.pojo.LoginInfo;
+import com.eload.vo.VerifyCodeVO;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.eload.pojo.LoginInfo;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户的上下文
@@ -27,7 +27,7 @@ public class UserContext {
 
 	public static void putCurrent(LoginInfo current) {
 		getSession().setAttribute(LOGININFO_IN_SESSION, current);
-	}
+}
 
 	
 	public static LoginInfo getCurrent() {
@@ -36,19 +36,19 @@ public class UserContext {
 
 	/**
 	 *存放 VerifyCodeVO
-	 *//*
+	 */
 	public static void putVerifyCode(VerifyCodeVO vo){
 		getSession().setAttribute(VERIFYCODE_IN_SESSION, vo);
 	}
 	
-	*//**
+	/**
 	 * 取出session中的verifyCodeVO
 	 * @return
-	 *//*
+	 */
 	public static VerifyCodeVO getVerifyCode(){
 		VerifyCodeVO vo = (VerifyCodeVO) getSession().getAttribute(VERIFYCODE_IN_SESSION);
 		return vo ;
-	} */
+	} 
 }
 
 

@@ -158,7 +158,7 @@
 											<h5>实名认证</h5>
 											<c:choose>
 												<c:when test = "${userInfo.realauthid==1}"><p>已认证 <a href="/realAuth.do">查看</a></p></c:when>
-												<c:when test = "${userInfo.realauthid!=1}"><p>未认证 <a href="/realAuth.do">马上认证 </a></p></c:when>
+												<c:when test = "${userInfo.realauthid==2}"><p>未认证 <a href="/realAuth.do">马上认证 </a></p></c:when>
 											</c:choose>
 										</div>
 										<div class="clearfix"></div>

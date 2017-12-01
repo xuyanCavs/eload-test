@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,8 +16,8 @@
 		<div class="container" style="position: relative;">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/">首页</a></li>
-				<li><a href="/login.html">登录</a></li>
-				<li><a href="/register.html">快速注册</a></li>
+				<li><a href="/login.jsp">登录</a></li>
+				<li><a href="/register.jsp">快速注册</a></li>
 				<li><a href="#">帮助</a></li>
 			</ul>
 		</div>
@@ -59,7 +60,7 @@
 						<li>材料认证分数达到30分</li>
 						<li>视频认证</li>
 					</ul>
-					<a href="/login.html" class="el-borrow-apply">
+					<a href="/login.jsp" class="el-borrow-apply">
 						登陆后申请
 					</a>
 				</div>
