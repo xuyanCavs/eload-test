@@ -44,5 +44,5 @@
     <mvc:resources mapping="/images/**" location="/images/"/>
     <!--存放百度富文本编辑器的目录-->
     <!--<mvc:resources mapping="/ueditor/**" location="/ueditor/"/>-->
-
+    <mvc:resources mapping="/upload/**" location="/upload/"/>
 </beans>

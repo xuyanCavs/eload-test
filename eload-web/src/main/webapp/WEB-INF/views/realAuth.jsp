@@ -155,7 +155,7 @@
 								<div class="form-group">
 						        	<label class="col-sm-4 control-label" for="realName">姓名</label>
 					        		<div class="col-sm-8">
-						        		<input id="realName" name="realName" class="form-control" type="text" value="">
+						        		<input id="realName" name="realname" class="form-control" type="text" value="">
 						        	</div>
 						        </div>
 						        <div class="form-group">
@@ -168,15 +168,15 @@
 						        	</div>
 						        </div>
 						        <div class="form-group">
-						        	<label class="col-sm-4  control-label" for="idnumber">证件号码</label>
+						        	<label class="col-sm-4  control-label" for="idNumber">证件号码</label>
 					        		<div class="col-sm-8">
-						        		<input id="idNumber" class="form-control" name="idNumber"  type="text" value="">
+						        		<input id="idNumber" class="form-control" name="idnumber"  type="text" value="">
 						        	</div>
 						        </div>
 						        <div class="form-group">
 						        	<label class="col-sm-4  control-label" for="bornDate">出生日期</label>
 					        		<div class="col-sm-8">
-						        		<input id="birthDate"  class="form-control" name="bornDate" type="text">
+						        		<input id="birthDate"  class="form-control" name="birthdate" type="text">
 						        	</div>
 						        </div>
 						        <div class="form-group">

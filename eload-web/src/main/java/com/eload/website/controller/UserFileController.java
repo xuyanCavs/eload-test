@@ -2,9 +2,9 @@ package com.eload.website.controller;
 
 import com.eload.pojo.LoginInfo;
 import com.eload.pojo.UserFile;
+import com.eload.util.UploadUtil;
+import com.eload.util.UserContext;
 import com.eload.website.service.UserFileService;
-import com.eload.website.util.UploadUtil;
-import com.eload.website.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -26,16 +27,10 @@ public class UserFileController {
     private ServletContext servletContext;
 
     @RequestMapping("userFile")
-    public String getUserFile(Model model){
+    public String getUserFile(Model model, HttpServletRequest request){
         //todo 坐等叶总session到位
-        LoginInfo current = UserContext.getCurrent();
-        if (current==null){
-            current = new LoginInfo();
-            current.setId(6L);
-        }else {
-            current.setId(6L);
-        }
-        List<UserFile> userFiles = userFileService.getUserFiles(current.getId());
+        LoginInfo logininfo = (LoginInfo) request.getSession().getAttribute("logininfo");
+        List<UserFile> userFiles = userFileService.getUserFiles(logininfo.getId());
         model.addAttribute("userFiles",userFiles);
         return "userFiles";
     }

@@ -1,6 +1,7 @@
 package com.eload.website.controller;
 
 import com.eload.pojo.Account;
+import com.eload.pojo.LoginInfo;
 import com.eload.pojo.UserInfo;
 import com.eload.website.service.AccountService;
 import com.eload.website.service.UserInfoService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 个人中心
@@ -23,10 +26,10 @@ public class PersonalCotroller {
 
 
 	@RequestMapping("personal")
-	public String personalCenter(Model model) {
-
-		UserInfo userInfo = userInfoService.getUserInfo(6L);
-		Account account = accountService.getAccount(6L);
+	public String personalCenter(Model model, HttpServletRequest request) {
+		LoginInfo logininfo = (LoginInfo)request.getSession().getAttribute("logininfo");
+		UserInfo userInfo = userInfoService.getUserInfo(logininfo.getId());
+		Account account = accountService.getAccount(logininfo.getId());
 		model.addAttribute("account",account);
 		model.addAttribute("userInfo",userInfo);
 		return "personal";
