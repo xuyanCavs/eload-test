@@ -60,18 +60,22 @@
         <div class="col-sm-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    用户认证文件信息
+                    用户认证文件信息<br>
+                    信用总分：${score}
                 </div>
             </div>
             <div class="row">
-                   <c:if test="${userFiles!=null}">
-                    <c:forEach items="${userFiles}" var="userFile">
+                   <c:if test="${userFileTypes!=null}">
+                    <c:forEach items="${userFileTypes}" var="userFile">
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <img src="userFile.image" />
+                            <img src="${userFile.file}" />
                             <div class="caption">
-                                <h4>userFile.fileType.title</h4>
-                                <p>得分：userFile.score &nbsp;&nbsp;状态：userFile.state</p>
+                                <h4>认证文件类型：${userFile.title}</h4>
+                                <p>得分：${userFile.score} <br/>
+                                    状态:<c:if test="${userFile.state==1}">通过</c:if>
+                                    <c:if test="${userFile.state==2}">未通过</c:if>
+                                    <c:if test="${userFile.state==0}">审批中</c:if></p>
                             </div>
                         </div>
                     </div>

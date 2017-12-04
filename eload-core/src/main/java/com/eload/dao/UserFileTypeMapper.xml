@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eload.dao.UserFileTypeMapper" >
+  <select id="selectAll" resultType="com.eload.vo.UserFileType" parameterType="java.lang.Long">
+    select u.id,u.state,u.file,u.score,u.filetype_id filetypeId,s.title
+    from userfile u left  join  systemdictionaryitem s on u.filetype_id = s.id
+    where u.applier_id = #{id}
+  </select>
+</mapper>
