@@ -8,6 +8,7 @@ import com.eload.util.UserContext;
 import com.eload.vo.UserFileType;
 import com.eload.website.service.SystemDictionaryItemService;
 import com.eload.website.service.UserFileService;
+import com.eload.website.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,11 +37,12 @@ public class UserFileController {
     @Autowired
     private SystemDictionaryItemService systemDictionaryItemService;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
     @RequestMapping("userFile")
     public String getUserFile(Model model, HttpServletRequest request){
-        //todo 坐等叶总session到位
         LoginInfo logininfo = (LoginInfo) request.getSession().getAttribute("logininfo");
-        //List<UserFile> userFiles = userFileService.getUserFiles(logininfo.getId());
         List<UserFileType> userFileTypes = userFileService.getUserFilesType(logininfo.getId());
         //算取目前该用户获取的总分
         Integer score = 0;
@@ -57,6 +58,8 @@ public class UserFileController {
                 score = score+score1;
             }
         }
+        //把总分更新到userinfo这个表中
+        userInfoService.updateRealauthScore(score,logininfo.getId());
         model.addAttribute("score",score);
         model.addAttribute("sessionId",request.getSession().getId());
         model.addAttribute("userFileTypes",userFileTypes);

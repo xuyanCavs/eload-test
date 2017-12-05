@@ -43,12 +43,13 @@
 						        	<label class="col-sm-4 control-label ">开户名</label>
 					        		<div class="col-sm-8">
 						        		<p class="form-control-static">${userInfo.realname}</p>
+										<input type="hidden" value="${userInfo.realname}" name="accountname">
 						        	</div>
 						        </div>
 						        <div class="form-group">
 						        	<label class="col-sm-4  control-label" for="bankName">开户行</label>
 					        		<div class="col-sm-4">
-						        		<select class="form-control" name="bankName" size="1">
+						        		<select class="form-control" name="bankname" size="1">
 											<script>
 											for(var k in SITE_BANK_TYPE_NAME_MAP){
 												var v = SITE_BANK_TYPE_NAME_MAP[k];
@@ -62,13 +63,13 @@
 						        <div class="form-group">
 						        	<label class="col-sm-4  control-label" for="bankforkname">支行名称</label>
 					        		<div class="col-sm-4">
-						        		<input id="id2Number" class="form-control" name="forkName"  type="text" value="">
+						        		<input id="id2Number" class="form-control" name="bankforkname"  type="text" value="">
 						        	</div>
 						        </div>
 						        <div class="form-group">
 						        	<label class="col-sm-4  control-label" for="accountNumber">银行账号</label>
 					        		<div class="col-sm-4">
-						        		<input id="idNumber" class="form-control" name="accountNumber"  type="text" value="">
+						        		<input id="idNumber" class="form-control" name="banknumber"  type="text" value="">
 						        	</div>
 						        </div>
 						        <div class="form-group">

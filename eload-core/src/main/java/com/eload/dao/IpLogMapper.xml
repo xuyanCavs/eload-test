@@ -242,4 +242,48 @@
       loginTime = #{logintime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <sql id="queryIplog">
+    <where>
+      <if test="loginInfoId!=null">
+        and loginInfoId = #{loginInfoId}
+      </if>
+      <if test="state!=-1">
+        and loginState = #{state}
+      </if>
+      <if test="beginDate!=null">
+        AND loginTime &gt;= #{beginDate}
+      </if>
+      <if test="endDate!=null">
+        AND loginTime &lt;= #{endDate}
+      </if>
+    </where>
+  </sql>
+
+  <sql id="base_column">
+    id, ip, loginState, username, loginTime
+  </sql>
+
+  <resultMap id="BaseResultMap1" type="com.eload.pojo.IpLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="loginState" property="loginstate" jdbcType="TINYINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="queryCount" parameterType="com.eload.query.IplogQueryObject" resultType="java.lang.Integer">
+    select count(1) from iplog
+    <include refid="queryIplog"/>
+  </select>
+
+
+  <select id="queryByPage" parameterType="com.eload.query.IplogQueryObject" resultMap="BaseResultMap1">
+    SELECT <include refid="base_column"/>
+    FROM iplog
+    <include refid="queryIplog"/>
+    ORDER BY loginTime DESC
+    LIMIT #{start},#{pageSize}
+  </select>
+
 </mapper>

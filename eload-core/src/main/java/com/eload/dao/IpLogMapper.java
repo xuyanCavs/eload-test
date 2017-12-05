@@ -2,6 +2,8 @@ package com.eload.dao;
 
 import com.eload.pojo.IpLog;
 import com.eload.pojo.IpLogExample;
+import com.eload.query.IplogQueryObject;
+import com.eload.query.PageResult;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +30,9 @@ public interface IpLogMapper {
     int updateByPrimaryKeySelective(IpLog record);
 
     int updateByPrimaryKey(IpLog record);
+
+    //按照条件查询总数
+    Integer queryCount(IplogQueryObject qo);
+
+    List<IpLog> queryByPage(IplogQueryObject qo);
 }

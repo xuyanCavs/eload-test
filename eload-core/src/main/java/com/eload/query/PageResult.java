@@ -3,13 +3,11 @@ package com.eload.query;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
 
 
 /**
  * 分页查询的结果对象
  */
-@Getter
 public class PageResult {
 
 	private List listData ;  //当前页的结果集数据
@@ -47,5 +45,28 @@ public class PageResult {
 		this.prevPage = this.currentPage - 1 >= 1 ? this.currentPage -1 :1 ;
 		this.nextPage = this.currentPage + 1 <= this.totalPage ? this.currentPage + 1 : this.totalPage;  
 	}
-	
+
+	public List getListData() {
+		return listData;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public Integer getPrevPage() {
+		return prevPage;
+	}
+
+	public Integer getNextPage() {
+		return nextPage;
+	}
 }

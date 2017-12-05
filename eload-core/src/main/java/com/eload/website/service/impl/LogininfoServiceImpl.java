@@ -6,10 +6,7 @@ import com.eload.dao.IpLogMapper;
 import com.eload.dao.LoginInfoMapper;
 import com.eload.dao.UserInfoMapper;
 import com.eload.pojo.*;
-import com.eload.util.BidConst;
-import com.eload.util.IDUtils;
-import com.eload.util.MD5;
-import com.eload.util.UserContext;
+import com.eload.util.*;
 import com.eload.website.service.ILoginInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,10 +99,11 @@ public class LogininfoServiceImpl implements ILoginInfoService {
 			current = loginInfos.get(0);
 			//登陆日志的相关信息
 			IpLog iplog = new IpLog();
-			iplog.setIp("10.31.164.33");
+			iplog.setIp(IpAddressUtils.getIpAddress());
 			iplog.setLogintime(new Date());
 			iplog.setLogintype((byte)1);
 			iplog.setUsername(username);
+			iplog.setLogininfoid(current.getId());
 			// iplog.setUserType(userType);
 			if (current != null  ) {
 				//查询有,登录成功,将对象放到session中,否则返回一个null

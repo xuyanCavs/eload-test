@@ -40,7 +40,10 @@
 										<table style="width: 100%;height: 100px;">
 											<tr>
 												<td><span>真实姓名： ${realAuth.realname}</span></td>
-												<td><span>性别：${realAuth.sex}</span></td>
+												<td><span>
+													性别：<c:if test="${realAuth.sex==0}">男</c:if>
+													<c:if test="${realAuth.sex==1}">女</c:if>
+												</span></td>
 											</tr>
 											<tr>
 												<td><span>证件号码： ${realAuth.idnumber}</span></td>

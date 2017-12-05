@@ -125,7 +125,7 @@
 
 						<div class="row h4 account-info">
 							<div class="col-sm-4">
-								账户总额：<span class="text-primary"><%--${account.totalAmount}--%>元</span>
+								账户总额：<span class="text-primary">5000.0000元</span>
 							</div>
 							<div class="col-sm-4">
 								可用金额：<span class="text-primary">${account.usableamount}元</span>
